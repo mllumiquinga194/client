@@ -1,0 +1,45 @@
+<div id="gallery-users" *ngIf="users && identity && identity.role == 'ROLE_ADMIN'">
+    <h1>{{titulo}}</h1>
+    <ul id="users-list">
+        <li *ngFor="let user of users" class="users-item">
+            <div class="title">
+                <div class="users-image">
+                    <img src="{{ url + 'get-image-user/' + user.image }}" style="width: 57px" />
+                </div>
+                <strong>
+                    {{user.name + ' || '+ user.surname + ' || ' + user.email + ' || ' + user.role}}
+                </strong>
+
+                <div class="buttons" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+                    <a [routerLink]="['/mis-datos', user._id]" class="btn btn-warning">
+                        Editar
+                    </a>
+                    <a (click)="onDeleteConfirm(user._id)" class="btn btn-danger">
+                        Borrar
+                    </a>
+                </div>
+
+                <div class="seguro seguro-user" *ngIf="confirmado == user._id">
+                    <a (click)="onDeleteUser(user._id)" class="btn btn-danger">
+                        Eliminar
+                    </a>
+                    <a (click)="onCancelUser()" class="btn btn-primary">
+                        Cancelar
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="!identity || identity.role != 'ROLE_ADMIN' " class="col-lg-6">
+    <h1>
+        Error
+    </h1>
+    <p>
+        No tienes Acceso a esta parte de la App!!
+    </p>
+
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="identity" class="col-lg-6">
+
+    <h1>{{ titulo }}</h1>
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info" role="alert">
+            {{alertMessage}}
+        </div>
+    </div>
+    <form #formUpdatePass="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label>Constraseña Actual</label>
+            <input type="password" #password="ngModel" name="password" [(ngModel)]="pass_actual.password" required class="form-control"
+            />
+            <span *ngIf="!password && password.touched">
+                La contraseña es obligatoria
+            </span>
+        </p>
+        <p>
+            <label>Constraseña Nueva</label>
+            <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" required class="form-control"/>
+            <span *ngIf="!password && password.touched">
+                    La contraseña es obligatoria
+            </span>
+        </p>
+        <input type="submit" value="{{titulo}}" [disabled]="!formUpdatePass.form.valid" class="btn btn-primary" />
+        <a class="volver" [routerLink]="['/']" class="btn btn-success">
+            Volver
+        </a>
+    </form>
+    <!-- <input [(ngModel)]="username">
+
+    <p>Hello {{username}}!</p> -->
+</div>

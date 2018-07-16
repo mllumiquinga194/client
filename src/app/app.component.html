@@ -1,0 +1,136 @@
+<!--*ngIf="" directiva de comprobacion para hacer condicionales y bucles... si identity es verdadero, se muestra, sino, no se muestra -->
+<div *ngIf="identity" class="navigation col-lg-1">
+  <h1 class="head-title">
+    <a [routerLink]="['/']">
+      <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+      {{ title }}
+    </a>
+    <!--esto viene del app.component y se llama INTERPOLACION DE VARIABLES -->
+  </h1>
+  <nav id="navigation">
+    <a [routerLink]="['/buscar']">
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      Buscar
+    </a>
+    <!-- [routerLinkActive]="['actived']" para que cuando este link este activo o seleccionado, mantenga activa la clase actived la cual le agregamos algunos stilos con css -->
+    <a [routerLink]="['/artistas', 1]" [routerLinkActive]="['actived']">
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      Artistas
+    </a>
+    <a [routerLink]="['/albums']" [routerLinkActive]="['actived']">
+      <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+      Album
+    </a>
+  </nav>
+
+  <nav id="user_logged">
+
+    <div class="user-image">
+      <a [routerLink]="['mi-contrasena']" [routerLinkActive]="['actived']">
+        <img id="image-logged" src="{{ url + 'get-image-user/' + identity.image }}" />
+      </a>
+    </div>
+
+    <span id="identity_user">
+      {{identity.name}}
+    </span>
+    <a *ngIf="identity && identity.role == 'ROLE_ADMIN'" [routerLink]="['usuarios']" [routerLinkActive]="['actived']">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      Usuarios
+    </a>
+
+    <!-- para cerrar sesion.  (click)="logout()" la hacer click aca lo que haremos es llamar a una funcion que eliminar lo que hay en el localstorage -->
+    <a [routerLink]="['mis-datos', identity._id]" [routerLinkActive]="['actived']">
+      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+      Mis Datos
+    </a>
+    <a (click)="logout()" class="btn-logout">
+      <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+      Salir
+    </a>
+
+  </nav>
+</div>
+
+
+<!-- <div *ngIf="identity" class="central col-lg-11"> -->
+<!--si lo dejo de esta forma, me puede dar el error de que no me cargue el copmponente ArtistListComponent dentro del router-outlet debido a que la condicion no se cumple *ngIf="identity". aunque a mi no me daba este error, cambie la linea por la de abajo que hace lo mismo solo que oculto-->
+<div [class.hidden]="!identity" class="central col-lg-11">
+  <!-- <p>Estas logeado en la aplicacion</p> -->
+  <!-- cada vez que cargamos una url miramos el path que tiene la url, ese path esta relacionado con un componente y ese componenete es el que se carga en una etiqueta que nosotros tenemos en la pag. aqui se va a cargar en funcion de la url que nosotros vayamos cargando diferentes en el navegador, se ira cargando un componente u otro que nosotros tengamos asociados a los path de cada ruta-->
+  <router-outlet></router-outlet>
+  <div class="clearfix"></div>
+  <player class="player" *ngIf="identity"></player>
+</div>
+
+
+<div class="col-lg-11" *ngIf="!identity">
+  <div class="col-lg-6">
+    <h1>Identificate</h1>
+
+    <!-- para mostrar cuando por alguna razon ocurra algun error. usamos alerta de bootstrap -->
+    <div *ngIf="errorMessage">
+      <div class="alert alert-info" role="alert">
+        <strong>Error!!</strong> {{errorMessage}}
+      </div>
+    </div>
+    <!-- #loginForm="ngForm" de esta forma le indico a angular que este va a ser un formulario suyo -->
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
+      <p>
+        <label>Correo Electronico</label>
+        <!-- a cada campo le tengo que agregar un nombre y sera de tipo "ngModel" para poder hacer el binding. asi mismo le tengo que colocar un nombre con el nombre que tiene el campo, en este caso es email y tambien debo usar la directiva de atributo y de binding [(ngModel)]="user.email" donde le indico qué propiedad del objeto va a modificar -->
+        <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required/>
+        <!-- mensaje de error en el caso de que no se haya rellenado este campo. *ngIf="!email.valid aqui se refiere al nombre que estoy colocando #email="ngModel"  -->
+        <span *ngIf="!email.valid && email.touched">
+          El email es obligatorio
+        </span>
+      </p>
+      <p>
+        <label>Contraseña</label>
+        <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control" required/>
+      </p>
+      <input type="submit" value="Entrar" class="btn btn-primary">
+    </form>
+  </div>
+
+  <div class="col-lg-6">
+    <h1>Registrate</h1>
+    <div *ngIf="alertRegister">
+      <div class="alert alert-info" role="alert">
+        <strong>Error!!</strong> {{alertRegister}}
+      </div>
+    </div>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md-10">
+      <p>
+        <label>Nombre</label>
+        <input type="text" #name="ngModel" name="name" [(ngModel)]="user_register.name" class="form-control" required/>
+        <span *ngIf="!name.valid && name.touched">
+          El nombre es obligatorio
+        </span>
+      </p>
+      <p>
+        <label>Apellidos</label>
+        <input type="text" #surname="ngModel" name="surname" [(ngModel)]="user_register.surname" class="form-control" required/>
+        <span *ngIf="!surname.valid && surname.touched">
+          El apellido es obligatorio
+        </span>
+      </p>
+      <p>
+        <label>Correo Electronico</label>
+        <input type="email" #email="ngModel" name="email" [(ngModel)]="user_register.email" class="form-control" required/>
+        <span *ngIf="!email.valid && email.touched">
+          El email es obligatorio
+        </span>
+      </p>
+      <p>
+        <label>Contraseña</label>
+        <input type="password" #password="ngModel" name="password" [(ngModel)]="user_register.password" class="form-control" required/>
+        <span *ngIf="!password.valid && password.touched">
+          la Contraseña es obligatoria
+        </span>
+      </p>
+      <input type="submit" value="Registrarse" class="btn btn-primary">
+    </form>
+  </div>
+
+</div>

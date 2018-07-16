@@ -1,0 +1,286 @@
+/* Global */
+html, body{
+    margin: 0px;
+    height: 100%;
+    background: #eee;
+}
+
+.actived{
+    border-bottom: 4px solid #84BD00;
+    padding-bottom: 4px;
+}
+
+.central{
+    height: 100%;
+    overflow-y: scroll; 
+}
+
+.seguro{
+    margin-top: -30px;
+    background: #222326;
+    position: absolute;
+    height: 40px;
+}
+
+.seguro-song{
+    right: 10px;
+    margin-top: -35px;
+    background: #eee;
+}
+
+.seguro-album{
+    margin-top: -41px;
+    margin-left: 10px;
+}
+
+.seguro-user{
+    margin-top: -50px;
+    margin-left: 1107px;
+    background: #eee;
+}
+
+/* BARRA LATERAL */
+
+.head-title{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: block;
+}
+.navigation{
+    text-align: center;
+    color: white;
+    background: #1C1C1F;
+    height: 100%;
+}
+.navigation a{
+    color: #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+.navigation a :hover{
+    color: white;
+}
+
+.navigation .glyphicon{
+    font-size: 25px;
+    display: block;
+    width: 100%;
+}
+
+#user_logged{
+    background: #1C1C1F;
+    position: absolute;
+    bottom: 0px;
+    border-top: 1px solid #444;
+    width: 75%;
+}
+
+#user_logged .user-image{
+    background: #eee;
+    border-radius: 100px;
+    height: 57px;
+    width: 57px;
+    margin: 0px auto;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.title .users-image{
+    background: #eee;
+    border-radius: 100px;
+    height: 57px;
+    width: 57px;
+    /* margin: 0px auto; */
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#user_logged .user-image img{
+    width: 57px;
+    margin-top: -20px;
+}
+
+.btn-logout{
+    cursor: pointer;
+}
+
+/* Detalle Artistas y ALBUMS */
+
+#artist-head-card .image,
+#album-head-card .image{
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+    float: left;
+    margin-right: 30px;
+}
+
+#artist-head-card .image img,
+#album-head-card .image img{
+    height: 170px;
+}
+
+/* ARTISTA y album */
+
+.artist_image_for_edit img,
+.album_image_for_edit img{
+    width: 150px;
+}
+
+.artists-list,
+.album-list{
+    margin: 0px;
+    padding: 0px;
+    margin-top: 30px;
+    list-style: none;
+    min-height: 600px
+}
+
+.artists-item,
+.album-item{
+    width: 23%;
+    margin: 0px;
+    padding: 0px;
+    height: 317px;
+    border: 1px solid #444;
+    margin-left: 20px;
+    /*margin-top: 20px;*/
+    background: #222326;
+
+}
+.artists-item .artists-image,
+.album-item .album-image{
+    height: 245px;
+    width: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+.artists-item .artists-image img{
+    height: 100%;
+    display:block;
+    margin:auto;
+}
+
+.artists-item .artists-name,
+.album-item .album-name{
+    color: white;
+    padding: 10px;
+    background: #222326;
+
+}
+
+.artists-item .artists-name a,
+.album-item .album-name a{
+    color: white;
+}
+
+/*ALBUMS*/
+
+.album-list{
+    height: auto;
+    margin-bottom: 550px;
+}
+
+.album-item .album-image{
+    height: 188px;
+}
+
+.album-item{
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.album-item .album-image img{
+    width: 100%;
+}
+
+/*CANCIONES*/
+
+#songs-list,
+#users-list{
+    margin: 0px;
+    padding: 0px;
+    min-height: 800px;
+    padding-bottom: 200px;
+}
+
+.song-item,
+.users-item{
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    padding-top: 3px;
+}
+.song-bus-item{
+    list-style: none;
+    padding-top: 3px;
+}
+
+.song-item .title{
+    padding: 14px;
+    height: 58px;
+
+}
+.users-item .title{
+    padding: 14px;
+    height: 119px;
+
+}
+
+.song-item .buttons,
+.users-item .buttons{
+    float: right;
+
+}
+
+.users-item .buttons{
+    margin-top: -47px;
+    padding: 5px;
+
+}
+
+.song-item .btn-success{
+    margin-right: 10px;
+}
+
+/*PLAYER*/
+
+.player{
+    background: #1C1C1f;
+    position: fixed;
+    width: 91%;
+    bottom: 0;
+    padding: 20px;
+    margin-left: -15px;
+    border-left: 1px solid #444;
+    color: gray
+
+}
+
+.player .album-image{
+    float: left;
+    width: 138px;
+    height: 105px;
+    overflow: hidden;
+}
+
+.player .album-image img{
+    height: 100%;
+}
+.player .audio-file{
+    width: 85%;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 10px;
+    float: left;
+}
+
+.player audio{
+    width: 100%;
+    height: 40px;
+}

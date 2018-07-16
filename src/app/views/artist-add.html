@@ -1,0 +1,48 @@
+<div *ngIf="identity && identity.role == 'ROLE_ADMIN' " class="col-lg-6">
+
+    <h1>{{titulo}}</h1>
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info" role="alert">
+            {{alertMessage}}
+        </div>
+    </div>
+    <form #formArtist="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label>Nombre</label>
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="artist.name" required class="form-control" />
+            <span *ngIf="!name && name.touched">
+                El nombre es obligatorio
+            </span>
+        </p>
+
+        <p>
+            <label>Descripción</label>
+            <textarea #description="ngModel" name="description" [(ngModel)]="artist.description" required class="form-control"></textarea>
+            <span *ngIf="!description && description.touched">
+                La descripción es obligatorio
+            </span>
+        </p>
+
+        <div *ngIf="is_edit">
+            <div class="artist_image_for_edit" *ngIf="artist.image && artist.image != 'null'">
+                <img src="{{url + 'get-image-artist/' + artist.image}}" />
+            </div>
+            <p>
+                <label>Sube la imagen del Artista</label>
+                <input type="file" placeholder="Subir Imagen..." (change)="fileChangeEvent($event)">
+            </p>
+        </div>
+        <!-- mientras el formulario no sea valido que no aparezca, para eso us o[disabled]="!formArtist.form.valid" -->
+        <input type="submit" value="{{titulo}}" [disabled]="!formArtist.form.valid" class="btn btn-success" />
+    </form>
+</div>
+
+<div *ngIf="!identity || identity.role != 'ROLE_ADMIN' " class="col-lg-6">
+    <h1>
+        Error
+    </h1>
+    <p>
+        No tienes Acceso a esta parte de la App!!
+    </p>
+
+</div>

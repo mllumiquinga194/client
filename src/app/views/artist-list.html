@@ -1,0 +1,48 @@
+<div class="head-page" *ngIf="identity">
+    <h1>
+        {{ titulo }}
+    </h1>
+    <a *ngIf="identity && identity.role == 'ROLE_ADMIN'" [routerLink]="['/crear-artista']" class="btn btn-default">
+        Añadir Artista
+    </a>
+
+    <ul class="pagination pull-right">
+        <li>
+            <a [routerLink]="['/artistas', prev_page]">&laquo;</a>
+        </li>
+        <li *ngIf="next_page <= numero_paginas">
+            <a [routerLink]="['/artistas', next_page]">&raquo;</a>
+        </li>
+    </ul>
+</div>
+
+<div class="clearfix">
+    <ul class="artists-list" *ngIf="identity">
+        <!-- este bucle con ngFor va a generar un li por cada elemento -->
+        <li *ngFor="let artist of artists" class="col-lg-3 artists-item">
+            <!--en cada iteracion del bucle ve recorriendo el array de artistas y ve creandome el objeto de artists y lo vmaos imprimiendo -->
+            <div class="artists-image">
+                <a [routerLink]="['/artista', artist._id]">
+                <img id="image_artist" src="{{ url + 'get-image-artist/' + artist.image }}" />
+            </a>
+            </div>
+            
+            <div class="artists-name">
+                <!-- este artist es el que voy creando en el *ngFor no es el artists que tengo como propiedad en el artist-list-component -->
+                <a [routerLink]="['/artista', artist._id]">
+                    {{artist.name}}
+                </a>
+
+                <div class="buttons" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+                    <a [routerLink]="['/editar-artista', artist._id]" class="btn btn-sm btn-warning">Editar</a>
+                    <a (click)="onDeleteConfirm(artist._id)" class="btn btn-sm btn-danger">Borrar</a>
+                </div>
+
+                <div class="seguro" *ngIf="confirmado == artist._id">
+                    <a (click)="onDeleteArtist(artist._id)" class="btn btn-sm btn-danger">Eliminar</a>
+                    <a (click)="onCancelArtist()" class="btn btn-sm btn-primary">Cancelar</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,46 @@
+<h1>{{titulo}}</h1>
+<p>Corregir la busqueda, no lo dejes así, tu puedes!!!</p>
+
+<p>Escribe el nombre de tu música favorita</p>
+
+<input [(ngModel)]="searchText" (keyup)="showSearchResults($event)" class="search-input" />
+
+<ul *ngIf="searching === true" class="search-results">
+  <li *ngFor="let item of song | search : searchText" class="song-item">
+    <!-- <a [routerLink]="['/album', song._id]">{{ item }}</a> -->
+    <div id="gallery-songs" *ngIf="songs">
+      <ul id="songs-list">
+        <li *ngFor="let song of songs" class="song-bus-item">
+          <div class="title" *ngIf=" song.name == item">
+            <a [routerLink]="['/album', song.album._id]">{{ item }}</a>
+
+            <!-- <a class="btn btn-success" (click)="startPlayer(song)">
+              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            </a>
+            {{song.number + ' . '+ song.name + ' - ' + song.duration}}
+            <div class="buttons" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+              <a [routerLink]="['/editar-tema', song._id]" class="btn btn-warning">
+                Editar
+              </a>
+              <a (click)="onDeleteConfirm(song._id)" class="btn btn-danger">
+                Borrar
+              </a>
+            </div>
+
+            <div class="seguro seguro-song" *ngIf="confirmado == song._id">
+              <a (click)="onDeleteSong(song._id)" class="btn btn-danger">
+                Eliminar
+              </a>
+              <a (click)="onCancelSong()" class="btn btn-primary">
+                Cancelar
+              </a>
+            </div>
+            <div class="clearfix"></div> -->
+
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </li>
+</ul>
