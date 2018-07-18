@@ -97,7 +97,7 @@
     <h1>Registrate</h1>
     <div *ngIf="alertRegister">
       <div class="alert alert-info" role="alert">
-        <strong>Error!!</strong> {{alertRegister}}
+        {{alertRegister}}
       </div>
     </div>
     <form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md-10">

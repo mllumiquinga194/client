@@ -21,6 +21,14 @@
         El apellido es obligatorio
       </span>
     </p>
+    <!-- para no perminitir que un usuario se edite a si mismo su rol -->
+    <p *ngIf="identity.role == 'ROLE_ADMIN' && identity._id != user._id">
+      <label>Rol</label>
+      <select name="role" #role="ngModel" [(ngModel)]="user.role" class="form-control">
+        <option value="ROLE_ADMIN">Administrador</option>
+        <option value="ROLE_USER">Usuario</option>
+      </select>
+    </p>
     <p>
       <label>Correo Electronico</label>
       <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required/>

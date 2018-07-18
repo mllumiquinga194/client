@@ -18,9 +18,9 @@
                         Borrar
                     </a>
                 </div>
-
-                <div class="seguro seguro-user" *ngIf="confirmado == user._id">
-                    <a (click)="onDeleteUser(user._id)" class="btn btn-danger">
+                <!-- identity._id != user._id para impedir que me borre a mi mismo :) -->
+                <div class="seguro seguro-user" *ngIf="identity._id != user._id && confirmado == user._id">
+                    <a (click)="onDeleteUser(user._id)" class="btn btn-danger" >
                         Eliminar
                     </a>
                     <a (click)="onCancelUser()" class="btn btn-primary">

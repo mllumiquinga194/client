@@ -21,7 +21,7 @@ export class UserPassComponent implements OnInit {
     public token;
     public alertMessage;
     public url: string;
-    public pass_actual: User;
+    public pass_actual;
 
     constructor(
 
@@ -33,11 +33,12 @@ export class UserPassComponent implements OnInit {
         this.token = this._userService.getToken();
         this.user = this.identity; //para que al momento de actualizar, en el formulario ya me aparezcan los datos del usuario logeado.
         this.url = GLOBAL.url;
-        this.pass_actual = new User('', '', '', '', '', '', '');
+        this.pass_actual = {
+            password: ''
+        }
     }
 
     ngOnInit() {
-
         console.log('User-pass.component.ts cargado');
     }
 
@@ -47,9 +48,9 @@ export class UserPassComponent implements OnInit {
         if (this.pass_actual == null) {
             this.alertMessage = 'Rellene todos los campos';
         } else {
-            console.log(this.pass_actual.password);
+            // console.log(this.pass_actual.password);
 
-            console.log(this.user.password);
+            // console.log(this.user.password);
 
             //aqui llamo al metodo de comparacion que esta en _userService
             this._userService.comparePass(this.token, this.pass_actual, this.identity._id).subscribe(
@@ -57,8 +58,8 @@ export class UserPassComponent implements OnInit {
                     if (!response.user) {
                         this.alertMessage = 'La contraseña no coincide';
                     } else {
-                        console.log('esto viene del servidor: ', response.user);
-                        console.log(this.user);
+                        // console.log('esto viene del servidor: ', response.user);
+                        // console.log(this.user);
 
                         if (this.user.password == null) {
                             this.alertMessage = 'Rellene todos los campos';
@@ -74,7 +75,7 @@ export class UserPassComponent implements OnInit {
                                         this.alertMessage = 'El usuario no se ha actualizado';
                                     } else {
 
-                                        this.alertMessage = 'datos actualizados correctamente';
+                                        this.alertMessage = 'Datos actualizados correctamente';
                                     }
                                 },
                                 error => {
@@ -88,7 +89,7 @@ export class UserPassComponent implements OnInit {
                                         console.log(error);
                                     }
                                 });
-                            this._router.navigate(['mis-datos']);
+                            this._router.navigate(['mi-contrasena']);
                         }
                     }
                 },

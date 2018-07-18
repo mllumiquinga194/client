@@ -89,7 +89,7 @@ export class UsersDetailsComponent implements OnInit {
                 }
                 console.log('Borrado este Id: ',response.user._id);
                 
-                this.getUsers();
+                this.getUsers();//para actualizar la lista de usuarios
             },
             error => {
                 //cuando recibimos un error, lo recibimos diferente a cuando recibimos un status200 que es un json usable. en este caso vamos a parsear a json el error para poder usar correctamente el mensaje del error y mostrarlo en la alerta
