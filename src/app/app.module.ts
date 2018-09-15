@@ -32,6 +32,9 @@ import { PlayerComponent } from './components/player.component';
 import { BusquedaComponent } from './components/busqueda.component';
 import { SearchPipe } from './pipes/search.pipe';
 
+//Forms
+import { ReactiveFormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [ //declaramos componenetes y directivas
@@ -57,6 +60,7 @@ import { SearchPipe } from './pipes/search.pipe';
   ],
   imports: [//cargamos modulos del framework y modulos que hagamos nosotros
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     routing

@@ -21,7 +21,7 @@
         El apellido es obligatorio
       </span>
     </p>
-    <!-- para no perminitir que un usuario se edite a si mismo su rol -->
+    <!-- para que solo los admin puedan editar los roles y para que no pueda editarse asi mismo!! -->
     <p *ngIf="identity.role == 'ROLE_ADMIN' && identity._id != user._id">
       <label>Rol</label>
       <select name="role" #role="ngModel" [(ngModel)]="user.role" class="form-control">

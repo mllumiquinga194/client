@@ -9,15 +9,15 @@
     <form #formUpdatePass="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <label>Constraseña Actual</label>
-            <input type="password" #password="ngModel" name="password" [(ngModel)]="pass_actual.password" required class="form-control" placeholder="contraseña Actual"/>
-            <span *ngIf="!password && password.touched">
+            <input type="password" class="form-control" [formControl]="passwordActual" placeholder="Contraseña Actual" #paravaciar>
+            <span *ngIf="!passwordActual && passwordActual.touched">
                 La contraseña es obligatoria
             </span>
         </p>
         <p>
             <label>Constraseña Nueva</label>
-            <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" required class="form-control" placeholder="contraseña Nueva"/>
-            <span *ngIf="!password && password.touched">
+            <input type="password" class="form-control" [formControl]="passwordNueva" placeholder="Contraseña Nueva" #paravaciar1>
+            <span *ngIf="!passwordNueva && passwordNueva.touched">
                     La contraseña es obligatoria
             </span>
         </p>

@@ -18,12 +18,14 @@ import { SongService } from '../services/song.service';
 
 export class BusquedaComponent implements OnInit {
     public titulo: string;
+    public songs: Song;
     public searching: boolean = false;
     public identity;
     public token;
     public url: string;
     public alertMessage;
     public song: any = [];
+    public confirmado;
 
 
     constructor(
@@ -38,37 +40,74 @@ export class BusquedaComponent implements OnInit {
 
     ngOnInit() {
         console.log('Busqueda.component.ts cargado');
+        this.getSongs();//para llamar al album y mostrar su nombre al momento de cargar una nueva cancion
 
     }
 
-    public showSearchResults(event: any): void {
-        if (event.target.value.length >= 1) {
-            this._songService.searchSongs(this.token, event.target.value).subscribe(
-                response => {
-                    this.song = [];
-                    // recorro el arreglo que viene en respone pero pude tambien asignarlo de una vez a song
+    getSongs() {
+        this._songService.getSongs(this.token, null).subscribe(
+            response => {
+                if (!response.songs) {
+                } else {
+                    this.songs = response.songs;
                     for (var i in response.songs) {
-                        this.song.push(response.songs[i]);
+                        this.song.push(response.songs[i].name);
                     }
-                    this.searching = true;//indica que ya realizo la busqueda
-                    console.log(this.song);
+                    console.log(this.songs);
 
-                },
-                error => {
-                    //cuando recibimos un error, lo recibimos diferente a cuando recibimos un status200 que es un json usable. en este caso vamos a parsear a json el error para poder usar correctamente el mensaje del error y mostrarlo en la alerta
-                    var errorMessage = <any>error;
-
-                    if (errorMessage != null) {
-                        var body = JSON.parse(error._body);
-
-                        this.alertMessage = body.message;
-                        console.log(error);
-                    }
                 }
-            );
+            },
+            error => {
+                //cuando recibimos un error, lo recibimos diferente a cuando recibimos un status200 que es un json usable. en este caso vamos a parsear a json el error para poder usar correctamente el mensaje del error y mostrarlo en la alerta
+                var errorMessage = <any>error;
+
+                if (errorMessage != null) {
+                    var body = JSON.parse(error._body);
+
+                    this.alertMessage = body.message;
+                    console.log(error);
+                }
+            }
+        );
+    }
+
+    public showSearchResults(event: any): void {
+        if (event.target.value.length >= 3) {
+            this.searching = true;
         } else {
             this.searching = false;
         }
+    }
+
+    onDeleteConfirm(id) {
+        this.confirmado = id;
+    }
+
+    onCancelSong() {
+        this.confirmado = null;
+    }
+
+    onDeleteSong(id) {
+        this._songService.deleteSong(this.token, id).subscribe(
+            response => {
+
+                if (!response.song) {
+                    alert('Error en el servidor')
+                }
+                this.getSongs();
+            },
+            error => {
+                //cuando recibimos un error, lo recibimos diferente a cuando recibimos un status200 que es un json usable. en este caso vamos a parsear a json el error para poder usar correctamente el mensaje del error y mostrarlo en la alerta
+                var errorMessage = <any>error;
+
+                if (errorMessage != null) {
+                    var body = JSON.parse(error._body);
+
+                    //this.alertMessage = body.message;
+                    console.log(error);
+                }
+            }
+        )
     }
 
     startPlayer(song) {

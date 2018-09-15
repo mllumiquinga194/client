@@ -52,5 +52,10 @@ export class SongService {
         return this._http.delete(this.url+'song/'+id, options).pipe(map(res => res.json()));
     }
 
+    searchSongs(token, name: string){
+        let headers = new Headers({'Content-Type': 'application/json', 'Authorization': token });
+        let options = new RequestOptions({headers: headers});
+        return this._http.get(this.url+'searchsongs/'+name, options).pipe(map(res => res.json()));
+    }
 
 }
