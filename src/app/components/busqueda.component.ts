@@ -23,7 +23,9 @@ export class BusquedaComponent implements OnInit {
     public token;
     public url: string;
     public alertMessage;
-    public song: any = [];
+    public song: Song[];
+    public existe: boolean;
+    public searchText;
 
 
     constructor(
@@ -45,13 +47,14 @@ export class BusquedaComponent implements OnInit {
         if (event.target.value.length >= 1) {
             this._songService.searchSongs(this.token, event.target.value).subscribe(
                 response => {
-                    this.song = [];
+                    this.song = [];//para que en cada resultado el array esté vacio!
+                    this.song = response.songs;
                     // recorro el arreglo que viene en respone pero pude tambien asignarlo de una vez a song
-                    for (var i in response.songs) {
-                        this.song.push(response.songs[i]);
-                    }
+                    // for (var i in response.songs) {
+                    //     this.song.push(response.songs[i]);
+                    // }
                     this.searching = true;//indica que ya realizo la busqueda
-                    console.log(this.song);
+                    //console.log(this.song);
 
                 },
                 error => {
@@ -72,11 +75,13 @@ export class BusquedaComponent implements OnInit {
     }
 
     startPlayer(song) {
+
         let song_player = JSON.stringify(song);//convertir el objeto que nos llega a un string de JSON para luego guardarla en el localstorage
         let file_path = this.url + 'get-song-file/' + song.file;//guardo la ruta de esa cancion para hacer que persista
         let image_path = this.url + 'get-image-album/' + song.album.image;//guardo la imagen del album de esa cancion para hacer que persista
 
         localStorage.setItem('sound_song', song_player);//para guardar la cancion que esta sonando
+
         document.getElementById("mp3-source").setAttribute("src", file_path);//para cambiar los valores que tiene le reproductor
 
         (document.getElementById("player") as any).load();//para cargar la cancion en el player.
@@ -86,6 +91,7 @@ export class BusquedaComponent implements OnInit {
         document.getElementById('play-song-artist').innerHTML = song.album.artist.name;
         document.getElementById('play-image-album').setAttribute('src', image_path);
         document.getElementById('repro').innerHTML = 'Reproduciendo';
+
     }
 
 }
