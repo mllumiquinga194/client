@@ -37,12 +37,10 @@ export class ArtistAddComponent implements OnInit {
     }
 
     ngOnInit(){
-        console.log('artist-add.component.ts cargado');
         
     }
 
     onSubmit(){
-        console.log(this.artist);
         this._artistService.addArtist(this.token, this.artist).subscribe(
             response => {
 

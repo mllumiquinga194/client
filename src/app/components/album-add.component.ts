@@ -47,7 +47,6 @@ export class AlbumAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('album-add.component.ts cargado');
         //Llamar al metodo del api para sacar un artista en base a su id getArtist
         this.getArtist();
 
@@ -91,7 +90,6 @@ export class AlbumAddComponent implements OnInit {
                     if(!response.album){
                         this.alertMessage = 'Error en el servidor';
                     }else{
-                        console.log(response.album);
                         
                         this.alertMessage = 'El album se ha creado correctamente!';
                         this.album = response.album;

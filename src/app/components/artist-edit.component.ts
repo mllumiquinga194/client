@@ -44,7 +44,6 @@ export class ArtistEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('artist-edit.component.ts cargado');
         //Llamar al metodo del api para sacar un artista en base a su id getArtist
         this.getArtist();
         
@@ -79,7 +78,6 @@ export class ArtistEditComponent implements OnInit {
     }
 
     onSubmit() {
-        // console.log(this.artist);
         //para recibir todos los parametros que son enviados por url
         this._route.params.forEach((params: Params) => {
             let id = params['id'];

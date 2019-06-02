@@ -63,7 +63,7 @@ html, body{
 }
 
 .navigation a :hover{
-    color: white;
+    color: rgb(117, 105, 105);
 }
 
 .navigation .glyphicon{
@@ -133,6 +133,10 @@ html, body{
 }
 
 .artists-list,
+.artists-item
+{
+    list-style: none;
+}
 .album-list{
     margin: 0px;
     padding: 0px;
@@ -141,7 +145,7 @@ html, body{
     min-height: 600px
 }
 
-.artists-item,
+/* .artists-item, */
 .album-item{
     width: 23%;
     margin: 0px;

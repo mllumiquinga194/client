@@ -43,11 +43,9 @@ export class PlayerComponent implements OnInit {
         this.url = GLOBAL.url;
     }
     ngOnInit() {
-        console.log('player cargado');
 
         //para que cuando recarge la pagina, tener siempre en el reproductor, la cancion que se estaba reproduciendo
         var song = JSON.parse(localStorage.getItem('sound_song'));
-        console.log(song);
         
         if(song){
             this.song = song;

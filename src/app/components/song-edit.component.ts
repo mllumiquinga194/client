@@ -52,7 +52,6 @@ export class SongEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('song-edit.component.ts cargado');
         this.getSong();//Sacar la cancion a editar
     }
 

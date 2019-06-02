@@ -46,7 +46,6 @@ export class SongAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('song-add.component.ts cargado');
         this.getAlbum();//para llamar al album y mostrar su nombre al momento de cargar una nueva cancion
     }
 

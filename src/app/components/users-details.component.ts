@@ -37,8 +37,6 @@ export class UsersDetailsComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        console.log('Users-details.component.ts cargado');
         this.getUsers();
     }
 
@@ -51,7 +49,6 @@ export class UsersDetailsComponent implements OnInit {
                     this._router.navigate(['/']);
                 } else {
                     this.users = response.users;
-                    console.log(this.users);
                     
                 }
             },
@@ -87,7 +84,6 @@ export class UsersDetailsComponent implements OnInit {
                 if(!response.user){
                     alert('Error en el servidor');
                 }
-                console.log('Borrado este Id: ',response.user._id);
                 
                 this.getUsers();//para actualizar la lista de usuarios
             },

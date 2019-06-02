@@ -1,5 +1,5 @@
 <!--*ngIf="" directiva de comprobacion para hacer condicionales y bucles... si identity es verdadero, se muestra, sino, no se muestra -->
-<div *ngIf="identity" class="navigation col-lg-1">
+<div *ngIf="identity" class="navigation col-1 col-sm-1 col-md-1">
   <h1 class="head-title">
     <a [routerLink]="['/']">
       <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
@@ -64,8 +64,8 @@
 </div>
 
 
-<div class="col-lg-11" *ngIf="!identity">
-  <div class="col-lg-6">
+<div class="row" *ngIf="!identity">
+  <div class="col-12 col-sm-6 col-md-6">
     <h1>Identificate</h1>
 
     <!-- para mostrar cuando por alguna razon ocurra algun error. usamos alerta de bootstrap -->
@@ -93,7 +93,7 @@
     </form>
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-12 col-sm-6 col-md-6">
     <h1>Registrate</h1>
     <div *ngIf="alertRegister">
       <div class="alert alert-info" role="alert">

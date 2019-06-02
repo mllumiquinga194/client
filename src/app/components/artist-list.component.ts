@@ -43,7 +43,6 @@ export class ArtistListComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('artist-list.component.ts cargado');
         this.getArtists();
 
     }
@@ -55,13 +54,14 @@ export class ArtistListComponent implements OnInit {
             if (!this.page) {
                 this.page = 1;
             } else {
-                this.next_page = this.page + 1;
                 this.prev_page = this.page - 1;
+                this.next_page = this.page + 1;
 
                 if (this.prev_page == 0) {
                     this.prev_page = 1;
                 }
             }
+            
 
             this._artistService.getArtists(this.token, this.page).subscribe(
                 response => {
@@ -73,6 +73,7 @@ export class ArtistListComponent implements OnInit {
                         let resto = response.total_items % 4;
                         if (resto == 0) {
                             this.numero_paginas = response.total_items / 4;
+                            
                         } else {
                             this.pages = response.total_items / 4;
                             this.numero_paginas = parseInt(this.pages) + 1;

@@ -43,7 +43,6 @@ export class AlbumDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('album-detail.component.ts cargado');
         //Llamar al metodo del api para sacar un album en base a su id getalbum
         this.getAlbum();
 
@@ -51,7 +50,6 @@ export class AlbumDetailComponent implements OnInit {
 
     //para mostrar el artista en el formulario
     getAlbum() {
-        console.log("el metodo funciona");
         
         this._route.params.forEach((params: Params) => {
             let id = params['id'];
@@ -62,7 +60,6 @@ export class AlbumDetailComponent implements OnInit {
                         this._router.navigate(['/']);
                     } else {
                         this.album = response.album;
-                        console.log("album: ",response.album._id);
                         
                         //sacar las camciones de este album
                         this._songService.getSongs(this.token, response.album._id).subscribe(
@@ -70,7 +67,6 @@ export class AlbumDetailComponent implements OnInit {
                                 if (!response.songs) {
                                     this.alertMessage = 'Este Album no tiene Canciones';
                                 } else {
-                                    console.log(response.songs);
 
                                     this.songs = response.songs;
                                 }

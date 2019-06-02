@@ -38,13 +38,9 @@ export class AppComponent implements OnInit {
     // ya al acceder a la aplicacion podemos tomar los valores que estan en el localstorage (asignados en onSubmit) pero estos valores hay que procesarlos por lo cual vamos a crear unos metodos en nuestro servicio UserService para ahorrarnos ese trabajpo cada vez que querramos recoger algo del localstorage
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-
-    console.log(this.identity);
-    console.log(this.token);
   }
 
   public onSubmit() {
-    console.log(this.user);//que es el objeto que se esta modificando con el two way data binding
 
     //conseguir los datos del usuario identificado
     this._userService.signup(this.user).subscribe(
@@ -115,7 +111,6 @@ export class AppComponent implements OnInit {
   }
 
   public onSubmitRegister() {
-    console.log(this.user_register);//que es el objeto que se esta modificando con el two way data binding
 
     this._userService.register(this.user_register).subscribe(Response => {
       

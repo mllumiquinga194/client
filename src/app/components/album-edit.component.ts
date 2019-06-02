@@ -46,7 +46,6 @@ export class AlbumEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('album-edit.component.ts cargado');
         //Llamar al metodo del api para sacar un algum en base
         //Conseguir el album y mostrarlo en el formulario
         this.getAlbum();

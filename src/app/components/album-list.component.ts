@@ -39,7 +39,6 @@ export class AlbumListComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('album-list.component.ts cargado');
         //Llamar al metodo del api para sacar un algum en base
         //Conseguir el album y mostrarlo en el formulario
         this.getAlbums();
@@ -53,7 +52,6 @@ export class AlbumListComponent implements OnInit {
                 if (!response.albums) {
                     this._router.navigate(['/']);
                 } else {
-                    console.log(response.albums);
                     
                     this.album = response.albums;
                 }

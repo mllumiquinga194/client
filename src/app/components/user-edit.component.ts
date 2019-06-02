@@ -37,9 +37,7 @@ export class UserEditComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        console.log('User-edit.component.ts cargado');
-        this.getUsers(); 
+        this.getUsers();
     }
 
     //ahora para que me muestre los datos en formulario de editar usuario, llamo a esta funcion this.getUsers(); y en ella recibo el ID del usuario que quiero editar. con el identity puedo mantener la informacion del usuario que esta logeado y no perderla.
@@ -53,8 +51,6 @@ export class UserEditComponent implements OnInit {
                         this._router.navigate(['/']);
                     } else {
                         this.user = response.users[0];
-                        console.log('voy a editar a', this.user.name);
-                        console.log('usuario logeado: ', this.identity.name, 'usuario a editar: ', this.user.name);
                     }
                 },
                 error => {
@@ -74,7 +70,6 @@ export class UserEditComponent implements OnInit {
     onSubmit() {
 
         //si entro directamente a MIS DATOS, voy a actualizar el usuario que esta logeado pero si entro a la lista de usuario y elijo EDITAR, podre editar el usuario que haya elegido, esta opcion es solamente para administradores. en this.user tengo la informacion del usuario a editar.
-        console.log('usuario logeado: ', this.identity.name, 'usuario a editar: ', this.user.name);
         this._userService.updateUser(this.user).subscribe(
             response => {
 
@@ -83,8 +78,7 @@ export class UserEditComponent implements OnInit {
                 } else {
                     //this.user = response.user;
                     //si en este punto tengo response.user es porque la edicion se dio correctamente.
-                    console.log('usuario logeado: ', this.identity.name, 'usuario a editar: ', this.user.name);
-                    
+
                     //para actualizar el localStorage yo primero consulto si el ID del usuario logeado es igual al ID del usuario que estoy editando. si es igual, actualizo el localStorage, si no es igual, no vale la pena actualizar el localStorage.
                     //esta condicion aplica tambien para poder cambiar el nombre en la vista
                     if (this.user._id == this.identity._id) {
@@ -95,26 +89,25 @@ export class UserEditComponent implements OnInit {
                     if (!this.filesToUpload) {
                         //redireccion
                     } else {
-                        this.makeFileRequest(this.url + 'upload-image-user/' + this.user._id, [], this.filesToUpload).then((result: any) => {
-                            this.user.image = result.image;
+                        this.makeFileRequest(this.url + 'upload-image-user/' + this.user._id, [], this.filesToUpload)
+                            .then((result: any) => {
+                                this.user.image = result.image;
 
-                            //solo actualizo el localStorage si los ID son iguales. esta actualizacion es para la imagen.
-                            if (this.user._id == this.identity._id) {
-                                localStorage.setItem('identity', JSON.stringify(this.user));
-                            }
+                                //solo actualizo el localStorage si los ID son iguales. esta actualizacion es para la imagen.
+                                if (this.user._id == this.identity._id) {
+                                    localStorage.setItem('identity', JSON.stringify(this.user));
+                                }
 
-                            //en image_path guardo la ubicacion de donde se encuentra la imagen del usuario. utilizo this.user.image porque yo se que asi se llama, por eso se lo contateno
-                            let image_path = this.url + 'get-image-user/' + this.user.image
-                            // cambio el atributo de la etiqueta src de esta forma y le mando la url guardada en image_path. identifico donde esta esa imagen por el id que tiene su etiqueta
-                            //console.log("imagen que devuelve result.name: ",image_path);
-                            console.log('usuario logeado: ', this.identity.name, 'usuario a editar: ', this.user.name);
+                                //en image_path guardo la ubicacion de donde se encuentra la imagen del usuario. utilizo this.user.image porque yo se que asi se llama, por eso se lo contateno
+                                let image_path = this.url + 'get-image-user/' + this.user.image
+                                // cambio el atributo de la etiqueta src de esta forma y le mando la url guardada en image_path. identifico donde esta esa imagen por el id que tiene su etiqueta
 
-                            //si llego a este punto es porque tambien cambie la imagen, la cual hago la misma consulta si quiero actualizar la magen que aparece en la vista. en dado caso que los ID sean diferentes es porque estoy editando un usuario que no es el logeado. por lo cual no cambio la imagen en la vista
-                            if (this.user._id == this.identity._id) {
-                                document.getElementById("image-logged").setAttribute('src', image_path);
-                            }
+                                //si llego a este punto es porque tambien cambie la imagen, la cual hago la misma consulta si quiero actualizar la magen que aparece en la vista. en dado caso que los ID sean diferentes es porque estoy editando un usuario que no es el logeado. por lo cual no cambio la imagen en la vista
+                                if (this.user._id == this.identity._id) {
+                                    document.getElementById("image-logged").setAttribute('src', image_path);
+                                }
 
-                        });
+                            });
                     }
 
                     this.alertMessage = 'datos actualizados correctamente';
@@ -137,7 +130,6 @@ export class UserEditComponent implements OnInit {
     //fileInput: any en el cual vamos a recibir la informacion de los ficheros target a subir
     fileChangeEvent(fileInput: any) {
         this.filesToUpload = <Array<File>>fileInput.target.files;//recoge los archivos que se han seleccionado en el input para posteriormente subirlos
-        // console.log(this.filesToUpload);
 
     }
     //para hacer la peticion ajax para subir ficheros convencionales

@@ -39,7 +39,6 @@ export class BusquedaComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Busqueda.component.ts cargado');
 
     }
 
@@ -54,7 +53,6 @@ export class BusquedaComponent implements OnInit {
                     //     this.song.push(response.songs[i]);
                     // }
                     this.searching = true;//indica que ya realizo la busqueda
-                    //console.log(this.song);
 
                 },
                 error => {

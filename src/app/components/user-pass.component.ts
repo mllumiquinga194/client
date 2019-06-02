@@ -48,7 +48,6 @@ export class UserPassComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('User-pass.component.ts cargado');
     }
 
     onSubmit() {
@@ -57,9 +56,6 @@ export class UserPassComponent implements OnInit {
         if (this.passwordActual == null) {
             this.alertMessage = 'Rellene todos los campos';
         } else {
-            // console.log(this.pass_actual.password);
-
-            // console.log(this.user.password);
 
             //aqui llamo al metodo de comparacion que esta en _userService
             this.pass_actual.password =  this.passwordActual.value;
@@ -68,8 +64,6 @@ export class UserPassComponent implements OnInit {
                     if (!response.user) {
                         this.alertMessage = 'La contraseña no coincide';
                     } else {
-                        // console.log('esto viene del servidor: ', response.user);
-                        // console.log(this.user);
 
                         if (this.passwordNueva == null) {
                             this.alertMessage = 'Rellene todos los campos';
@@ -91,7 +85,6 @@ export class UserPassComponent implements OnInit {
                                             this.paravaciar.nativeElement.value = '';
                                             this.paravaciar1.nativeElement.value = '';
                                           },1);
-                                        console.log('Datos actualizados correctamente');
                                     }
                                 },
                                 error => {
